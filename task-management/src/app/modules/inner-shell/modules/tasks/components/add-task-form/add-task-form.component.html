@@ -1,0 +1,28 @@
+<form [formGroup]="addTaskForm">
+  <div>
+    <label for="name">Name</label>
+    <input id="name" type="text" formControlName="text" pInputText />
+  </div>
+  <div>
+    <label for="name">isGlobal</label>
+    <p-checkbox formControlName="isGlobal" binary="true"></p-checkbox>
+  </div>
+  <div>
+    <label for="name">isLeader</label>
+    <p-checkbox formControlName="isLeader" binary="true"></p-checkbox>
+  </div>
+  <div>
+    <label for="name">Creator</label>
+    <p-dropdown [options]="users" [filter]="true" formControlName="creator" optionLabel="name" placeholder="Select"></p-dropdown>
+  </div>
+  <div>
+    <label for="name">start</label>
+    <p-calendar formControlName="start"></p-calendar>
+  </div>
+  <div>
+    <label for="name">end</label>
+    <p-calendar formControlName="end"></p-calendar>
+  </div>
+
+  <button pButton [disabled]="!addTaskForm.valid" type="button" label="Add Task" (click)="submitTaskForm()"></button>
+</form>
