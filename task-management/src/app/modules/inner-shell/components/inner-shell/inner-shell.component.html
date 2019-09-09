@@ -1,7 +1,11 @@
-<section class="inner-shell-container">
-  <app-side-nav-bar></app-side-nav-bar>
-  <app-header></app-header>
-  <section class="page-container">
-    <router-outlet></router-outlet>
+<section class="page">
+  <aside class="page__side-bar">
+    <app-side-nav-bar></app-side-nav-bar>
+  </aside>
+  <section class="page__inner">
+    <app-header class="page__header"></app-header>
+    <main class="page__content">
+      <router-outlet></router-outlet>
+    </main>
   </section>
 </section>

@@ -1,16 +1,12 @@
-<aside>
-  <nav>
-    <ul>
-      <li>
-        <a>
-          <i class="fa fa-home" [routerLink]="['/home']" routerLinkActive="router-link-active"> </i>
-        </a>
-      </li>
-      <li>
-        <a>
-          <i class="fa fa-tasks" [routerLink]="['/tasks']" routerLinkActive="router-link-active"> </i>
-        </a>
-      </li>
-    </ul>
-  </nav>
-</aside>
+<nav class="navbar">
+  <ul class="nav">
+    <li class="nav__item" [routerLink]="['/home']" routerLinkActive="nav__item--active">
+      <i class="fa fa-home fa-2x">
+      </i>
+    </li>
+    <li class="nav__item" [routerLink]="['/tasks']" routerLinkActive="nav__item--active">
+      <i class="fa fa-tasks fa-2x">
+      </i>
+    </li>
+  </ul>
+</nav>

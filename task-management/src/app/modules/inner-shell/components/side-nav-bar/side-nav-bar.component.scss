@@ -1,0 +1,23 @@
+.navbar {
+
+  padding-top: 90px;
+
+  .nav {
+    &__item {
+      padding: 15px;
+      text-align: center;
+      color: grey;
+
+      &--active {
+        color: darkslategrey;
+      }
+    }
+
+    &__item:hover {
+      :hover {
+        border: 1px darkslategrey solid;
+        border-radius: 2px;
+      }
+    }
+  }
+}
