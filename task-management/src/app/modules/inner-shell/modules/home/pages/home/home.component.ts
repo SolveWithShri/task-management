@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { TaskService } from './../../../../../../core/services/task.service';
+import { TaskStoreService } from './../../../../../../core/services/task-store.service';
 import { Task } from './../../../../../../core/dtos/task.dto';
 
 @Component({
@@ -14,14 +14,14 @@ export class HomeComponent implements OnInit {
   leaderTasks: Task[] = [];
   personalTasks: Task[] = [];
 
-  constructor(private taskService: TaskService) { }
+  constructor(private taskStoreService: TaskStoreService) { }
 
   ngOnInit(): void {
     this.fetchAllTasks();
   }
 
   private fetchAllTasks() {
-    this.taskService.getTasks()
+    this.taskStoreService.tasks$
       .subscribe((tasks = []) => {
         this.separateTasks(tasks);
       });

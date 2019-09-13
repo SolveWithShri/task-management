@@ -1,5 +1,6 @@
 import { Component, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 
 import { UserService } from './../../../../../../core/services/user.service';
 import { User } from './../../../../../../core/dtos/user.dto';
@@ -18,7 +19,10 @@ export class AddTaskFormComponent {
   addTaskForm: FormGroup;
   users: User[];
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) {
+  readonly dateFormatForPrimeNgCalender = 'yy-mm-dd';
+  readonly dateFormatAngularDatePipe = 'yyyy-MM-dd';
+
+  constructor(private formBuilder: FormBuilder, private datePipe: DatePipe, private userService: UserService) {
 
     this.userService.getUsers()
       .subscribe((users) => {
@@ -36,11 +40,12 @@ export class AddTaskFormComponent {
   }
 
   submitTaskForm() {
-
     const addTaskBody: Task = {
       ...this.addTaskForm.value,
       creator: this.addTaskForm.value['creator']['name'],
-      isCompleted: false
+      isCompleted: false,
+      start: this.datePipe.transform(this.addTaskForm.value['start'], this.dateFormatAngularDatePipe),
+      end: this.datePipe.transform(this.addTaskForm.value['end'], this.dateFormatAngularDatePipe)
     };
 
     this.addTask.emit(addTaskBody);

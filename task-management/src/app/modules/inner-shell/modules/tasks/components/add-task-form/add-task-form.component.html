@@ -17,11 +17,11 @@
   </div>
   <div>
     <label for="name">start</label>
-    <p-calendar formControlName="start"></p-calendar>
+    <p-calendar formControlName="start" [dateFormat]="dateFormatForPrimeNgCalender"></p-calendar>
   </div>
   <div>
     <label for="name">end</label>
-    <p-calendar formControlName="end"></p-calendar>
+    <p-calendar formControlName="end" [dateFormat]="dateFormatForPrimeNgCalender"></p-calendar>
   </div>
 
   <button pButton [disabled]="!addTaskForm.valid" type="button" label="Add Task" (click)="submitTaskForm()"></button>

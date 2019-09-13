@@ -20,7 +20,7 @@ export class TaskService {
       }));
   }
 
-  addTask(task: Task) {
-    console.log(task);
+  getUniqueTaskId(): number {
+    return new Date().valueOf();
   }
 }

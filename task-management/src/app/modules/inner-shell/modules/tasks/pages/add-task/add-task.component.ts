@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
-import { TaskService } from './../../../../../../core/services/task.service';
+import { TaskStoreService } from './../../../../../../core/services/task-store.service';
 import { Task } from './../../../../../../core/dtos/task.dto';
 
 @Component({
@@ -10,9 +11,10 @@ import { Task } from './../../../../../../core/dtos/task.dto';
 })
 export class AddTaskComponent {
 
-  constructor(private taskService: TaskService) { }
+  constructor(private router: Router, private taskStoreService: TaskStoreService) { }
 
   addTask(task: Task) {
-    this.taskService.addTask(task);
+    this.taskStoreService.addTask(task);
+    this.router.navigate(['/tasks']);
   }
 }
