@@ -1,5 +1,7 @@
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+
+import { SelectItem } from 'primeng/api';
 
 import { TaskStoreService } from './../../../core/services/task-store.service';
 import { Task } from './../../../core/dtos/task.dto';
@@ -10,7 +12,7 @@ import { LoaderService } from './../../../core/services/loader.service';
   templateUrl: './task-table.component.html',
   styleUrls: ['./task-table.component.scss']
 })
-export class TaskTableComponent {
+export class TaskTableComponent implements OnChanges {
 
   @Input()
   header: string;
@@ -29,7 +31,15 @@ export class TaskTableComponent {
     { field: 'end', header: 'End Date' }
   ];
 
+  creatorList: SelectItem[] = [];
+
   constructor(private taskStoreService: TaskStoreService, private loaderService: LoaderService) { }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['tasks']) {
+      this.updateCreatorListForColumnDropDown();
+    }
+  }
 
   toChangeTaskStatus(task: Task) {
     this.loaderService.showLoader();
@@ -39,5 +49,15 @@ export class TaskTableComponent {
       this.taskStoreService.setCompleted(task.id, task.isCompleted);
       this.loaderService.hideLoader();
     }, 2000);
+  }
+
+  private updateCreatorListForColumnDropDown() {
+    this.creatorList = Array.from(new Set(this.tasks.map(task => task.creator)))
+      .map(creator => {
+        return {
+          label: creator,
+          value: creator
+        };
+      });
   }
 }
