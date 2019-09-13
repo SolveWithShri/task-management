@@ -4,6 +4,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 
 import { Task } from '../dtos/task.dto';
 import { TaskService } from './task.service';
+import { map } from 'rxjs/internal/operators/map';
 
 // Credit goes to : https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8
 
@@ -15,6 +16,10 @@ export class TaskStoreService {
   private readonly _tasks = new BehaviorSubject<Task[]>([]);
 
   readonly tasks$ = this._tasks.asObservable();
+
+  readonly myTasksCount$ = this._tasks.pipe(map((tasks) => tasks.filter(task => !task.isGlobal).length));
+
+  readonly teamTasksCount$ = this._tasks.pipe(map((tasks) => tasks.filter(task => task.isGlobal).length));
 
   constructor(private taskService: TaskService) {
     this.taskService.getTasks()

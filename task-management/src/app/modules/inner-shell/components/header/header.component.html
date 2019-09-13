@@ -8,7 +8,7 @@
         My Tasks:
       </label>
       <span class="header__quick-info__item-value">
-        4
+        {{taskStoreService.myTasksCount$ | async}}
       </span>
     </div>
     <div class="header__quick-info__item header">
@@ -19,7 +19,7 @@
         Team Tasks:
       </label>
       <span class="header__quick-info__item-value">
-        15
+        {{taskStoreService.teamTasksCount$ | async}}
       </span>
     </div>
   </div>

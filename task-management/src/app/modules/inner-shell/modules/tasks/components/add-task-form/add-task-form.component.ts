@@ -31,7 +31,6 @@ export class AddTaskFormComponent {
 
     this.addTaskForm = this.formBuilder.group({
       text: new FormControl('', Validators.required),
-      isGlobal: new FormControl(false),
       isLeader: new FormControl(false),
       creator: new FormControl('', Validators.required),
       start: new FormControl('', Validators.required),
@@ -44,6 +43,7 @@ export class AddTaskFormComponent {
       ...this.addTaskForm.value,
       creator: this.addTaskForm.value['creator']['name'],
       isCompleted: false,
+      isGlobal: false,
       start: this.datePipe.transform(this.addTaskForm.value['start'], this.dateFormatAngularDatePipe),
       end: this.datePipe.transform(this.addTaskForm.value['end'], this.dateFormatAngularDatePipe)
     };
