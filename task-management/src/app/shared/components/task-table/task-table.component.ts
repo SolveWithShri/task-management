@@ -1,7 +1,9 @@
+
 import { Component, Input } from '@angular/core';
 
 import { TaskStoreService } from './../../../core/services/task-store.service';
 import { Task } from './../../../core/dtos/task.dto';
+import { LoaderService } from './../../../core/services/loader.service';
 
 @Component({
   selector: 'app-task-table',
@@ -19,8 +21,6 @@ export class TaskTableComponent {
   @Input()
   tasks: Task[] = [];
 
-  showLoader = false;
-
   columnSchema = [
     { field: 'text', header: 'Name' },
     { field: 'creator', header: 'Creator' },
@@ -29,15 +29,15 @@ export class TaskTableComponent {
     { field: 'end', header: 'End Date' }
   ];
 
-  constructor(private taskStoreService: TaskStoreService) { }
+  constructor(private taskStoreService: TaskStoreService, private loaderService: LoaderService) { }
 
   toChangeTaskStatus(task: Task) {
-    this.showLoader = true;
+    this.loaderService.showLoader();
 
     // Note - Just to provide delay of API call ;)
     setTimeout(() => {
       this.taskStoreService.setCompleted(task.id, task.isCompleted);
-      this.showLoader = false;
+      this.loaderService.hideLoader();
     }, 2000);
   }
 }

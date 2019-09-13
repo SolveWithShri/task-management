@@ -9,7 +9,6 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/components/common/messageservice';
 import { ToggleButtonModule } from 'primeng/togglebutton';
-import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 const componentList = [
     CardModule,
@@ -19,8 +18,7 @@ const componentList = [
     DropdownModule,
     ButtonModule,
     ToastModule,
-    ToggleButtonModule,
-    ProgressSpinnerModule
+    ToggleButtonModule
 ];
 
 @NgModule({

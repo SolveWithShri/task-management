@@ -2,28 +2,50 @@
   <form [formGroup]="addTaskForm">
     <div class="add-task-form__form-control">
       <label class="add-task-form__form-control__name" for="name">Name : </label>
-      <input class="add-task-form__form-control__control" id="name" type="text" formControlName="text" pInputText />
+      <input class="add-task-form__form-control__control" id="name" type="text" [formControlName]="addTaskFormKeys.text"
+        pInputText />
+    </div>
+    <div class="add-task-form__form-control__errors">
+      <div *ngIf="textFormControl && textFormControl.touched && textFormControl.errors">
+        This is required.
+      </div>
     </div>
     <div class="add-task-form__form-control">
       <label class="add-task-form__form-control__name" for="name">Is Leader : </label>
-      <p-checkbox class="add-task-form__form-control__control" formControlName="isLeader" binary="true"></p-checkbox>
+      <p-checkbox class="add-task-form__form-control__control" [formControlName]="addTaskFormKeys.isLeader"
+        binary="true"></p-checkbox>
     </div>
     <div class="add-task-form__form-control">
       <label class="add-task-form__form-control__name" for="name">Creator : </label>
       <p-dropdown class="add-task-form__form-control__control" [options]="users" [filter]="true"
-        formControlName="creator" optionLabel="name" placeholder="Select">
+        [formControlName]="addTaskFormKeys.creator" optionLabel="name" placeholder="Select">
       </p-dropdown>
+    </div>
+    <div class="add-task-form__form-control__errors">
+      <div *ngIf="creatorFormControl && creatorFormControl.touched && creatorFormControl.errors">
+        This is required.
+      </div>
     </div>
     <div class="add-task-form__form-control">
       <label class="add-task-form__form-control__name" for="name">Start : </label>
-      <p-calendar class="add-task-form__form-control__control" formControlName="start"
+      <p-calendar class="add-task-form__form-control__control" [formControlName]="addTaskFormKeys.start"
         [dateFormat]="dateFormatForPrimeNgCalender"></p-calendar>
+    </div>
+    <div class="add-task-form__form-control__errors">
+      <div *ngIf="startFormControl && startFormControl.touched && startFormControl.errors">
+        This is required.
+      </div>
     </div>
     <div class="add-task-form__form-control">
       <label class="add-task-form__form-control__name" for="name">End : </label>
-      <p-calendar class="add-task-form__form-control__control" formControlName="end"
+      <p-calendar class="add-task-form__form-control__control" [formControlName]="addTaskFormKeys.end"
         [dateFormat]="dateFormatForPrimeNgCalender"></p-calendar>
     </div>
-    <button pButton [disabled]="!addTaskForm.valid" type="button" label="Add Task" (click)="submitTaskForm()"></button>
+    <div class="add-task-form__form-control__errors">
+      <div *ngIf="endFormControl && endFormControl.touched && endFormControl.errors">
+        This is required.
+      </div>
+    </div>
+    <button pButton type="button" label="Add Task" (click)="submitTaskForm()"></button>
   </form>
 </div>

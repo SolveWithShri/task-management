@@ -16,11 +16,35 @@ export class AddTaskFormComponent {
   @Output()
   addTask: EventEmitter<Task> = new EventEmitter();
 
+  readonly addTaskFormKeys = {
+    text: 'text',
+    isLeader: 'isLeader',
+    creator: 'creator',
+    start: 'start',
+    end: 'end'
+  };
+  readonly dateFormatForPrimeNgCalender = 'yy-mm-dd';
+
   addTaskForm: FormGroup;
   users: User[];
 
-  readonly dateFormatForPrimeNgCalender = 'yy-mm-dd';
-  readonly dateFormatAngularDatePipe = 'yyyy-MM-dd';
+  private readonly dateFormatAngularDatePipe = 'yyyy-MM-dd';
+
+  get textFormControl(): FormControl {
+    return this.addTaskForm.controls[this.addTaskFormKeys.text] as FormControl;
+  }
+
+  get creatorFormControl(): FormControl {
+    return this.addTaskForm.controls[this.addTaskFormKeys.creator] as FormControl;
+  }
+
+  get startFormControl(): FormControl {
+    return this.addTaskForm.controls[this.addTaskFormKeys.start] as FormControl;
+  }
+
+  get endFormControl(): FormControl {
+    return this.addTaskForm.controls[this.addTaskFormKeys.end] as FormControl;
+  }
 
   constructor(private formBuilder: FormBuilder, private datePipe: DatePipe, private userService: UserService) {
 
@@ -30,25 +54,41 @@ export class AddTaskFormComponent {
       });
 
     this.addTaskForm = this.formBuilder.group({
-      text: new FormControl('', Validators.required),
-      isLeader: new FormControl(false),
-      creator: new FormControl('', Validators.required),
-      start: new FormControl('', Validators.required),
-      end: new FormControl('', Validators.required),
+      [this.addTaskFormKeys.text]: new FormControl('', Validators.required),
+      [this.addTaskFormKeys.isLeader]: new FormControl(false),
+      [this.addTaskFormKeys.creator]: new FormControl('', Validators.required),
+      [this.addTaskFormKeys.start]: new FormControl('', Validators.required),
+      [this.addTaskFormKeys.end]: new FormControl('', Validators.required)
     });
   }
 
   submitTaskForm() {
+
+    if (this.addTaskForm.invalid) {
+      this.markFormGroupTouched(this.addTaskForm);
+      return;
+    }
+
     const addTaskBody: Task = {
       ...this.addTaskForm.value,
-      creator: this.addTaskForm.value['creator']['name'],
+      creator: this.creatorFormControl.value['name'],
       isCompleted: false,
       isGlobal: false,
-      start: this.datePipe.transform(this.addTaskForm.value['start'], this.dateFormatAngularDatePipe),
-      end: this.datePipe.transform(this.addTaskForm.value['end'], this.dateFormatAngularDatePipe)
+      start: this.datePipe.transform(this.startFormControl.value, this.dateFormatAngularDatePipe),
+      end: this.datePipe.transform(this.endFormControl.value, this.dateFormatAngularDatePipe)
     };
 
     this.addTask.emit(addTaskBody);
     this.addTaskForm.disable();
+  }
+
+  private markFormGroupTouched(formGroup: FormGroup) {
+    (<any>Object).values(formGroup.controls).forEach(control => {
+      control.markAsTouched();
+
+      if (control.controls) {
+        this.markFormGroupTouched(control);
+      }
+    });
   }
 }

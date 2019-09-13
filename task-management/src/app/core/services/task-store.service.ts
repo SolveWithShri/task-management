@@ -17,9 +17,9 @@ export class TaskStoreService {
 
   readonly tasks$ = this._tasks.asObservable();
 
-  readonly myTasksCount$ = this._tasks.pipe(map((tasks) => tasks.filter(task => !task.isGlobal).length));
+  readonly myTasksCount$ = this._tasks.pipe(map((tasks) => tasks.filter(task => !task.isCompleted && !task.isGlobal).length));
 
-  readonly teamTasksCount$ = this._tasks.pipe(map((tasks) => tasks.filter(task => task.isGlobal).length));
+  readonly teamTasksCount$ = this._tasks.pipe(map((tasks) => tasks.filter(task => !task.isCompleted && task.isGlobal).length));
 
   constructor(private taskService: TaskService) {
     this.taskService.getTasks()

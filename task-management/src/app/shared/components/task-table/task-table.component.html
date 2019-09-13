@@ -41,7 +41,7 @@
           {{rowData[col.field]}}
         </td>
         <td class="text-align-center" *ngIf="isTaskStatusChangeAllowed">
-          <p-toggleButton onLabel="Done" offLabel="Not Done" onIcon="fa fa-check" offIcon="fa fa-times" iconPos="right"
+          <p-toggleButton onLabel="Done" offLabel="Mark as done" onIcon="fa fa-check" offIcon="fa fa-times" iconPos="right"
             (onChange)="toChangeTaskStatus(rowData)" [(ngModel)]="rowData['isCompleted']">
           </p-toggleButton>
         </td>
@@ -56,5 +56,3 @@
     </ng-template>
   </p-table>
 </p-card>
-
-<p-progressSpinner class="centered" *ngIf="showLoader"></p-progressSpinner>
