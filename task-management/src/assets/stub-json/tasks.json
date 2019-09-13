@@ -25,7 +25,7 @@
       "isGlobal": false,
       "isLeader": false,
       "creator": "Mithali Raj",
-      "isCompleted": false,
+      "isCompleted": true,
       "start": "2019-09-08",
       "end": "2019-09-10"
     },
@@ -55,7 +55,7 @@
       "isGlobal": true,
       "isLeader": false,
       "creator": "Babar Azam",
-      "isCompleted": false,
+      "isCompleted": true,
       "start": "2019-09-12",
       "end": "2019-09-17"
     },

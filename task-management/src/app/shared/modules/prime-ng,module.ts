@@ -8,10 +8,24 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/components/common/messageservice';
+import { ToggleButtonModule } from 'primeng/togglebutton';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+
+const componentList = [
+    CardModule,
+    TableModule,
+    CheckboxModule,
+    CalendarModule,
+    DropdownModule,
+    ButtonModule,
+    ToastModule,
+    ToggleButtonModule,
+    ProgressSpinnerModule
+];
 
 @NgModule({
-    imports: [CardModule, TableModule, CheckboxModule, CalendarModule, DropdownModule, ButtonModule, ToastModule],
-    exports: [CardModule, TableModule, CheckboxModule, CalendarModule, DropdownModule, ButtonModule, ToastModule],
+    imports: componentList,
+    exports: componentList,
     providers: [MessageService]
 })
 export class PrimeNgModule { }

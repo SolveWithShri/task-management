@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit {
   private fetchAllTasks() {
     this.taskStoreService.tasks$
       .subscribe((tasks = []) => {
+        this.clearAllTaskLists();
         this.separateTasks(tasks);
       });
   }
@@ -39,5 +40,11 @@ export class HomeComponent implements OnInit {
         this.personalTasks.push(task);
       }
     });
+  }
+
+  private clearAllTaskLists() {
+    this.globalTasks = [];
+    this.leaderTasks = [];
+    this.personalTasks = [];
   }
 }
