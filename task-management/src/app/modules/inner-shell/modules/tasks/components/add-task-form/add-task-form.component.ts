@@ -49,5 +49,6 @@ export class AddTaskFormComponent {
     };
 
     this.addTask.emit(addTaskBody);
+    this.addTaskForm.disable();
   }
 }
