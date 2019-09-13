@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
+import { map } from 'rxjs/internal/operators/map';
+import { delay } from 'rxjs/internal/operators/delay';
+import { tap } from 'rxjs/internal/operators/tap';
 
 import { Task } from '../dtos/task.dto';
 import { TaskService } from './task.service';
-import { map } from 'rxjs/internal/operators/map';
+import { LoaderService } from './loader.service';
 
-// Credit goes to : https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8
+// Credit for idea, goes to : https://dev.to/avatsaev/simple-state-management-in-angular-with-only-services-and-rxjs-41p8
 
 @Injectable({
   providedIn: 'root'
@@ -21,10 +24,16 @@ export class TaskStoreService {
 
   readonly teamTasksCount$ = this._tasks.pipe(map((tasks) => tasks.filter(task => !task.isCompleted && task.isGlobal).length));
 
-  constructor(private taskService: TaskService) {
+  constructor(private taskService: TaskService, private loaderService: LoaderService) {
+
     this.taskService.getTasks()
+      .pipe(
+        tap(() => this.loaderService.showLoader()),
+        delay(2000) // Delay to show API load effect
+      )
       .subscribe((tasks = []) => {
         this.setTasks(tasks);
+        this.loaderService.hideLoader();
       });
   }
 

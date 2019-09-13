@@ -23,7 +23,7 @@ export class AddTaskComponent {
   }
 
   navigateToTaskListPage() {
-    this.loaderService.showLoader();
     this.router.navigate(['/tasks']);
+    this.loaderService.hideLoader();
   }
 }

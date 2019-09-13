@@ -24,6 +24,7 @@ export class AddTaskFormComponent {
     end: 'end'
   };
   readonly dateFormatForPrimeNgCalender = 'yy-mm-dd';
+  readonly minDateValue = new Date();
 
   addTaskForm: FormGroup;
   users: User[];
