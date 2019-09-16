@@ -1,7 +1,4 @@
-<p-card>
-  <p-header>
-    <h3 class="text-align-center">{{header}}</h3>
-  </p-header>
+<p-card [header]="header">
   <p-table #tt [columns]="columnSchema" [value]="tasks" [paginator]="true" [rows]="10">
     <ng-template pTemplate="caption">
       <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -17,7 +14,7 @@
       </tr>
       <tr>
         <th *ngFor="let col of columns" [ngSwitch]="col.field">
-          <p-dropdown *ngSwitchCase="'creator'" [options]="creatorList" placeholder="Filter by user" [showClear]="true"
+          <p-dropdown *ngSwitchCase="'creator'" [options]="creatorList" placeholder="Filter" [showClear]="true"
             [style]="{'width':'100%'}" (onChange)="tt.filter($event.value, col.field, 'equals')"></p-dropdown>
         </th>
       </tr>
@@ -38,9 +35,11 @@
       </tr>
     </ng-template>
     <ng-template pTemplate="emptymessage" let-columns>
-      <tr class="text-align-center">
+      <tr>
         <td [attr.colspan]="columns.length">
-          No records found
+          <div class="empty-message">
+              No records found
+          </div>
         </td>
       </tr>
     </ng-template>

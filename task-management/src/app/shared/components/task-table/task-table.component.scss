@@ -1,0 +1,29 @@
+@import './../../../../styles/variables';
+
+.ui-table-caption {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+
+  .fa-search {
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+    font-size: $default-font-size;
+  }
+}
+
+.ui-dropdown {
+  min-width: 0;
+
+  &-label {
+    text-overflow: ellipsis;
+  }
+}
+
+.empty-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}

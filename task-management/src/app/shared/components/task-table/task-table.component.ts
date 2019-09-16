@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, ViewEncapsulation } from '@angular/core';
 
 import { MessageService } from 'primeng/components/common/messageservice';
 import { SelectItem } from 'primeng/components/common/selectitem';
@@ -10,7 +10,8 @@ import { LoaderService } from './../../../core/services/loader.service';
 @Component({
   selector: 'app-task-table',
   templateUrl: './task-table.component.html',
-  styleUrls: ['./task-table.component.scss']
+  styleUrls: ['./task-table.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class TaskTableComponent implements OnChanges {
 

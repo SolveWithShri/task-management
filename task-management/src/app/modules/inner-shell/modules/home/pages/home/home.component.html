@@ -1,5 +1,11 @@
-<app-task-table header="Global Tasks" [tasks]="globalTasks"></app-task-table>
-
-<app-task-table header="Personal Tasks" [tasks]="personalTasks"></app-task-table>
-
-<app-task-table header="Leader Tasks" [tasks]="leaderTasks"></app-task-table>
+<div class="d-flex flex-wrap">
+  <div class="col-50 p-15">
+    <app-task-table header="Global Tasks" [tasks]="globalTasks"></app-task-table>
+  </div>
+  <div class="col-50 p-15">
+    <app-task-table header="Personal Tasks" [tasks]="personalTasks"></app-task-table>
+  </div>
+  <div class="col-50 p-15">
+    <app-task-table header="Leader Tasks" [tasks]="leaderTasks"></app-task-table>
+  </div>
+</div>

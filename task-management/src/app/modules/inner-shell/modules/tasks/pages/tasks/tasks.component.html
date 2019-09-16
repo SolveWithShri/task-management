@@ -1,3 +1,5 @@
-<p-button label="Add task" [routerLink]="['add']"></p-button>
+<div class="task-toolbar">
+  <p-button label="Add task" [routerLink]="['add']"></p-button>
+</div>
 
 <app-task-table header="All Tasks" [tasks]="allTasks" [isTaskStatusChangeAllowed]="true"></app-task-table>
