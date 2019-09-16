@@ -1,22 +1,30 @@
+@import './../../../../../styles/variables';
+
 .navbar {
 
-  padding-top: 90px;
+  padding-top: $header-height;
 
   .nav {
+
+    text-align: center;
+
     &__item {
-      padding: 15px;
-      text-align: center;
-      color: grey;
+
+      padding: 20px 0;
+      color: $item-color;
+      border-left: 4px transparent solid;
+
+      &__icon {
+        display: block;
+      }
 
       &--active {
-        color: darkslategrey;
+        border-color: $item-border-color-selected;
+        background-color: $item-bg-color-hover;
       }
-    }
 
-    &__item:hover {
-      :hover {
-        border: 1px darkslategrey solid;
-        border-radius: 2px;
+      &:hover {
+        background-color: $item-bg-color-hover;
       }
     }
   }

@@ -1,24 +1,32 @@
-.page {
+@import './../../../../../styles/variables';
 
-  display: flex;
+.page {
 
   &__side-bar {
     height: 100vh;
-    width: 75px;
-    background: lightgrey;
+    width: $page-side-bar-width;
+    background-color: $white;
+    position: fixed;
+    box-shadow: 0 0 4px $page-bg;
+    z-index: 2;
   }
 
   &__inner {
-
-    flex: 1;
-
-    border: 1px blue solid;
-
-    &__header {
-      background: lightgrey;
-    }
-
-    &__content {}
+    width: calc(100% - #{$page-side-bar-width});
+    float: right;
   }
 
+  &__header {
+    width: calc(100% - #{$page-side-bar-width});
+    display: block;
+    background-color: $white;
+    position: fixed;
+    box-shadow: 0 0 4px $page-bg;
+    z-index: 1;
+  }
+
+  &__content {
+    margin-top: $header-height;
+    padding: 15px;
+  }
 }

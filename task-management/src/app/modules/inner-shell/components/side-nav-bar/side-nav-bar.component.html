@@ -1,12 +1,12 @@
 <nav class="navbar">
   <ul class="nav">
-    <li class="nav__item" [routerLink]="['/home']" routerLinkActive="nav__item--active">
-      <i class="fa fa-home fa-2x">
-      </i>
+    <li class="nav__item clickable" [routerLink]="['/home']" routerLinkActive="nav__item--active">
+      <i class="nav__item__icon fa fa-home fa-2x"> </i>
+      <label class="nav__item__label clickable">Home</label>
     </li>
-    <li class="nav__item" [routerLink]="['/tasks']" routerLinkActive="nav__item--active">
-      <i class="fa fa-tasks fa-2x">
-      </i>
+    <li class="nav__item clickable" [routerLink]="['/tasks']" routerLinkActive="nav__item--active">
+      <i class="nav__item__icon fa fa-tasks fa-2x"> </i>
+      <label class="nav__item__label clickable">Tasks</label>
     </li>
   </ul>
 </nav>

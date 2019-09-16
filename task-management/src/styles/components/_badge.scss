@@ -1,0 +1,16 @@
+@import './../variables';
+
+.badge {
+  display: inline-block;
+  padding: 5px 5px;
+  font-size: $default-font-size * 0.75;
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  border-radius: 3px;
+
+  &--primary {
+    background-color: $primary;
+    color: $white;
+  }
+}

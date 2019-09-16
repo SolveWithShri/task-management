@@ -7,18 +7,18 @@
       <label class="header__quick-info__item-label">
         My Tasks:
       </label>
-      <span class="header__quick-info__item-value">
+      <span class="header__quick-info__item-value badge badge--primary">
         {{taskStoreService.myTasksCount$ | async}}
       </span>
     </div>
-    <div class="header__quick-info__item header">
+    <div class="header__quick-info__item">
       |
     </div>
     <div class="header__quick-info__item">
       <label class="header__quick-info__item-label">
         Team Tasks:
       </label>
-      <span class="header__quick-info__item-value">
+      <span class="header__quick-info__item-value badge badge--primary">
         {{taskStoreService.teamTasksCount$ | async}}
       </span>
     </div>

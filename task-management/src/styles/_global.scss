@@ -1,5 +1,17 @@
+@import './variables';
+
+body {
+  background-color: $page-bg;
+  font-family: $default-font-family;
+  font-size: $default-font-size * 0.9;
+}
+
 .text-align-center {
   text-align: center;
+}
+
+.clickable {
+  cursor: pointer;
 }
 
 h2 {
