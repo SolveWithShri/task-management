@@ -48,7 +48,7 @@ export class TaskStoreService {
     ]);
   }
 
-  setCompleted(id: number, isCompleted: boolean) {
+  changeCompletedStatus(id: number, isCompleted: boolean) {
     const tasks = this.getTasks();
     const currentTask = tasks.find(todo => todo.id === id);
 

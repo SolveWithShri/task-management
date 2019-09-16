@@ -1,7 +1,7 @@
-
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
-import { SelectItem } from 'primeng/api';
+import { MessageService } from 'primeng/components/common/messageservice';
+import { SelectItem } from 'primeng/components/common/selectitem';
 
 import { TaskStoreService } from './../../../core/services/task-store.service';
 import { Task } from './../../../core/dtos/task.dto';
@@ -23,6 +23,8 @@ export class TaskTableComponent implements OnChanges {
   @Input()
   tasks: Task[] = [];
 
+  readonly changeStatusColumnField = 'changeStatus';
+
   columnSchema = [
     { field: 'text', header: 'Name' },
     { field: 'creator', header: 'Creator' },
@@ -33,11 +35,15 @@ export class TaskTableComponent implements OnChanges {
 
   creatorList: SelectItem[] = [];
 
-  constructor(private taskStoreService: TaskStoreService, private loaderService: LoaderService) { }
+  constructor(private taskStoreService: TaskStoreService, private loaderService: LoaderService, private messageService: MessageService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['tasks']) {
       this.updateCreatorListForColumnDropDown();
+    }
+
+    if (changes['isTaskStatusChangeAllowed'] && changes['isTaskStatusChangeAllowed'].currentValue) {
+      this.columnSchema.push({ field: this.changeStatusColumnField, header: 'Change status' });
     }
   }
 
@@ -46,8 +52,14 @@ export class TaskTableComponent implements OnChanges {
 
     // Note - Just to provide delay of API call ;)
     setTimeout(() => {
-      this.taskStoreService.setCompleted(task.id, task.isCompleted);
+      this.taskStoreService.changeCompletedStatus(task.id, task.isCompleted);
       this.loaderService.hideLoader();
+      this.messageService.add({
+        key: 'change-completed-status',
+        severity: 'success',
+        summary: 'Tasks: ',
+        detail: 'Task status changed.'
+      });
     }, 2000);
   }
 

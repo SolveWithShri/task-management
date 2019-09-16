@@ -14,26 +14,26 @@
           {{col.header}}
           <p-sortIcon [field]="col.field"></p-sortIcon>
         </th>
-        <th *ngIf="isTaskStatusChangeAllowed">
-          Change status
-        </th>
       </tr>
       <tr>
         <th *ngFor="let col of columns" [ngSwitch]="col.field">
-          <p-dropdown *ngSwitchCase="'creator'" [options]="creatorList" placeholder="Filter by user" [showClear]="true" [style]="{'width':'100%'}"
-            (onChange)="tt.filter($event.value, col.field, 'equals')"></p-dropdown>
+          <p-dropdown *ngSwitchCase="'creator'" [options]="creatorList" placeholder="Filter by user" [showClear]="true"
+            [style]="{'width':'100%'}" (onChange)="tt.filter($event.value, col.field, 'equals')"></p-dropdown>
         </th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns">
       <tr [pSelectableRow]="rowData">
         <td class="text-align-center" *ngFor="let col of columns">
-          {{rowData[col.field]}}
-        </td>
-        <td class="text-align-center" *ngIf="isTaskStatusChangeAllowed">
-          <p-toggleButton onLabel="Done" offLabel="Mark as done" onIcon="fa fa-check" offIcon="fa fa-times" iconPos="right"
-            (onChange)="toChangeTaskStatus(rowData)" [(ngModel)]="rowData['isCompleted']">
-          </p-toggleButton>
+          <ng-container *ngIf="col.field === changeStatusColumnField; then changeStatusRef; else normalDataRef "></ng-container>
+          <ng-template #changeStatusRef>
+            <p-toggleButton onLabel="Done" offLabel="Mark as done" onIcon="fa fa-check" offIcon="fa fa-check"
+              iconPos="right" (onChange)="toChangeTaskStatus(rowData)" [(ngModel)]="rowData['isCompleted']">
+            </p-toggleButton>
+          </ng-template>
+          <ng-template #normalDataRef>
+            {{rowData[col.field]}}
+          </ng-template>
         </td>
       </tr>
     </ng-template>
@@ -46,3 +46,5 @@
     </ng-template>
   </p-table>
 </p-card>
+
+<p-toast position="bottom-center" key="change-completed-status"></p-toast>
